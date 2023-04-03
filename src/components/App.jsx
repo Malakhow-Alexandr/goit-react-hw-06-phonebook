@@ -1,16 +1,25 @@
+import { ContactsList } from './contactsList/ContactLis';
+import { ContactForm } from './contactForm/ContactForm';
+import { ContactFilter } from './ContactFilter/Filter';
+import { Section } from './Section/Section';
+import { Container } from './Container/Container.styled';
+
 export const App = () => {
+  // const normalizedFilter = filter.toLowerCase();
+  // const filteredContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(normalizedFilter)
+  // );
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <Section title={'Phonebook'}>
+        <ContactForm></ContactForm>
+      </Section>
+
+      <Section title={'Contacts'}>
+        <ContactFilter />
+        <ContactsList />
+      </Section>
+    </Container>
   );
 };
