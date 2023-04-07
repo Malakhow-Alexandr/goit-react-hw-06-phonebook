@@ -29,8 +29,17 @@ const validationSchema = yup.object().shape({
   number: yup
     .string()
     .trim()
+    .test(
+      'maxDigits',
+      'Phone number must not have more than 12 digits',
+      value => {
+        if (!value) return true; // Skip validation if no value is provided
+        const numDigits = value.replace(/\D/g, '').length; // Count the number of digits
+        return numDigits <= 12; // Return true if the number of digits is less than or equal to 12
+      }
+    )
     .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{0,}/,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     )
     .required(),
